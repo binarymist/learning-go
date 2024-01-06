@@ -1,0 +1,3 @@
+module TheGoProgrammingLanguage/ch8_GoRoutinesAndChannels/8.4.3_UnidirectionalChannelTypes
+
+go 1.20

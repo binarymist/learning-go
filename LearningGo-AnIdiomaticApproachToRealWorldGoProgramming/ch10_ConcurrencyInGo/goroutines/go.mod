@@ -1,0 +1,3 @@
+module LearningGo-AnIdiomaticApproachToRealWorldGoProgramming/ch10_ConcurrencyInGo/goroutines
+
+go 1.20

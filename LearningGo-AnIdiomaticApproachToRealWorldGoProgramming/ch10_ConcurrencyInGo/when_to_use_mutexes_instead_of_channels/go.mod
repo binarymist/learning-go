@@ -1,0 +1,3 @@
+module LearningGo-AnIdiomaticApproachToRealWorldGoProgramming/ch10_ConcurrencyInGo/when_to_use_mutexes_instead_of_channels
+
+go 1.20
