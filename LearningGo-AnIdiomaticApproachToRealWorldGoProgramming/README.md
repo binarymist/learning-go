@@ -124,8 +124,11 @@ If using asdf, just follow the asdf documentation. You can have as many versions
 
 
 Todo: Work through "The Go Programming Language" Ch 8 and 9  
-  Up to Exercise 8.2
+  Up to end of 8.5 Looping in Parallel (pg 238)
+    We need to add something around this to this README, and also reference the gitlab project that uses this pattern.......................
 
+
+Looping in Parallel when we don't know the number of iterations.
 
 
 
@@ -531,7 +534,7 @@ As per (https://go.dev/tour/concurrency/2) By default, sends and receives block 
 
 [Being puzzled about channel size (#67)](https://100go.co/#being-puzzled-about-channel-size-67) of "100 Go Mistakes and How to Avoid Them" says:
 
-* "_Carefully decide on the right channel type to use, given a problem. Only unbuffered channels provide strong synchronization guarantees_"
+* "_Carefully decide on the right channel type to use, given a problem. Only unbuffered channels provide strong synchronization guarantees_". Thus they are sometimes called "_synchronous channels_" as mentioned on pg 226 of "The Go Programming Language"
 * "_You should have a good reason to specify a channel size other than one for buffered channels_"
 
 "_Like maps, channels are reference types. When you pass a channel to a function, you are really passing a pointer to the channel_"
@@ -552,6 +555,8 @@ The last paragraph of this page (Pg 207) discusses when to use unbuffered vs buf
 Pg 207, **Reading, Writing, and Buffering** of "Learning Go an Idiomatic approach..." discusses using the built-in `cap` and `len` functions to find out how many elements the channel can hold, and how many elements are currently in the channel respectively.
 
 Pg 209, **How Channels Behave** of "Learning Go an Idiomatic approach..." discusses the synchronisation of multiple writing channels using `sync.WaitGroup`, then refers to pg 220 ([Using WaitGroups](#using-waitgroups)). Pg 227, **8.4.1. Unbuffered Channels** of "The Go Programming Language" discusses using the "done" channel pattern. "Learning Go an Idiomatic approach..." also has a section on **The Done Channel Pattern**. "The Go Programming Language" also discusses and has examples for `sync.WaitGroup`.
+
+Pg 226, **8.4.1. Unbuffered Channels** of "The Go Programming Language" mentions "_When a value is sent on an unbuffered channel, the receipt of the value happens before the reawakening of the sending goroutine._"
 
 ## select
 
@@ -745,9 +750,9 @@ There is another timeout strategy on Pg 130 of **5.4.1. Error-Handling Strategie
 Sometimes one goroutine needs to wait for multiple goroutines (or more specifically, the writing channels within the multiple goroutines) to complete their work, and their writing channels closed. If you are waiting for a single goroutine, you can use the done channel pattern that we saw earlier. But if you are waiting on several goroutines, you need to use a
 WaitGroup.
 
-Also covered in:
+Also covered in: <div id="looping-in-parallel"></div> <!--anchor linked to from ../TheGoProgrammingLanguage/ch8_8.5/README.md-->
 
-* Pg 237, **8.5. Looping in Parallel** of "The Go Programming Language"
+* Pg 237-239, **8.5. Looping in Parallel** of "The Go Programming Language". The code for this can be found [here](https://github.com/adonovan/gopl.io/blob/1ae3ec64947b7a5331b186f1b1138fc98c0f1c06/ch8/thumbnail/thumbnail_test.go#L117-L146), as well as a copy of it [here](../TheGoProgrammingLanguage/ch8_8.5/thumbnail/thumbnail_test.go#L117-L146). I also used this pattern as a start for the Gitlab interview I did. You can see the pattern in the files: [bytes.go](https://github.com/binarymist/learning-go/blob/main/TheGoProgrammingLanguage/ch8_8.5/gitlab_interview/interview-task-161848681002-my-improvements/internal/dupe/bytes.go), [checksum.go](https://github.com/binarymist/learning-go/blob/main/TheGoProgrammingLanguage/ch8_8.5/gitlab_interview/interview-task-161848681002-my-improvements/internal/dupe/checksum.go), which the [find.go](https://github.com/binarymist/learning-go/blob/main/TheGoProgrammingLanguage/ch8_8.5/gitlab_interview/interview-task-161848681002-my-improvements/internal/dupe/find.go) file consumes
 * Pg 250, **8.8. Example: Concurrent Directory Traversal** of "The Go Programming Language" also has an example
 * Pg 274, **9.7. Example: Concurrent Non-Blocking Cache** of "The Go Programming Language" also has an example
 * "100 Go Mistakes and How to Avoid Them" [Misusing sync.WaitGroup (#71)](https://100go.co/#misusing-syncwaitgroup-71)

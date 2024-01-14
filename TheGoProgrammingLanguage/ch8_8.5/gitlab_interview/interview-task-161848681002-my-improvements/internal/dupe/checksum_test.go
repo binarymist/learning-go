@@ -1,0 +1,80 @@
+package dupe
+
+import (
+	"io/ioutil"
+	"os"
+	"path/filepath"
+	"strconv"
+	"testing"
+	"time"
+
+	"gitlab.com/gl-technical-interviews/backend/go/internal/dupe/fileutil"
+)
+
+func Test_findDuplicateByChecksum(t *testing.T) {
+	tmpDir, err := ioutil.TempDir("", t.Name())
+	if err != nil {
+		t.Fatal("Failed to create tmp dir for testdata")
+	}
+	defer func() {
+		err = os.RemoveAll(tmpDir)
+		if err != nil {
+			t.Logf("Failed to remove %s: %v", tmpDir, err)
+		}
+	}()
+
+	f, err := fileutil.Create(tmpDir, 10)
+	if err != nil {
+		t.Fatalf("Failed to create file: %v", err)
+	}
+
+	fCp := strconv.Itoa(time.Now().Nanosecond())
+	err = fileutil.Copy(f, filepath.Join(tmpDir, fCp))
+	if err != nil {
+		t.Fatalf("Failed to create file: %v", err)
+	}
+
+	duplicateByFirstByte := map[string][]string{
+		"10": {
+			filepath.Base(f),
+			filepath.Base(fCp),
+		},
+	}
+
+	cancelFindDuplicate := cancellation{
+		done: make(chan struct{}),
+	}
+
+	duplicateByFirstByteCh := make(chan map[string][]string)
+
+	go func() {
+		duplicateByFirstByteCh <- duplicateByFirstByte
+		close(duplicateByFirstByteCh)
+	}()
+
+	duplicateByChecksumCh := findDuplicateByChecksum(tmpDir, duplicateByFirstByteCh, &cancelFindDuplicate)
+
+	duplicateByChecksum, ok := <-duplicateByChecksumCh
+
+	if cancelFindDuplicate.reason != nil {
+		t.Fatalf("Got unexpected error: %v", cancelFindDuplicate.reason)
+	}
+
+	if !ok {
+		t.Errorf("Channel is closed, should be open for first message")
+	}
+	if len(duplicateByChecksum) != 1 {
+		t.Errorf("Got unexpected length of duplicates map, wanted 1 got: %d", len(duplicateByChecksum))
+	}
+	for _, duplicate := range duplicateByChecksum {
+		if len(duplicate) != 2 {
+			t.Errorf("Got unexpected length of duplicate slice, wanted 2 got: %d", len(duplicate))
+		}
+	}
+
+	message2, ok := <-duplicateByChecksumCh
+	if message2 != nil || ok {
+		t.Errorf("Channel is not closed after receiving 2nd message. 2nd message is %#v", message2)
+	}
+
+}
