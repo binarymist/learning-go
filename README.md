@@ -60,6 +60,15 @@ Review of the best Go books for 2023:
   * No function annotations
   * No thread-local storage
 
+Some chapters refer to exercises in previous chapters, and expect you to build on them.
+So you can't just read each chapter expecting it to be self contained.
+Some of the exercises such as creating an FTP server in Chapter 8 requires a lot of background knowledge.
+If you don't work on an FTP server on a daily basis, this exercise is likely to take you weeks.
+You'll learn all about FTP and little about Go. This is a side-track from learning Go, and a wast of time unless you want to learn all about FTP rather than Go.
+
+I started going through chapter "8. Goroutines and Channels" after reading chapter "10. Concurrency in Go" of "Learning Go: An Idiomatic Approach to Real-World Go Programming" and got up to "8.6. Example: Concurrent Web Crawler", then realised that I couldn't go any further without going back to Chapter 5, which I hadn't been through.
+
+
 100 Go Mistakes and How to Avoid Them
 
 * https://github.com/teivah/100-go-mistakes

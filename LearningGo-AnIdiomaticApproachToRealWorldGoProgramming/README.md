@@ -116,38 +116,14 @@ Go developers typically use Makefiles.
 
 If using asdf, just follow the asdf documentation. You can have as many versions of Go installed as you like, and specific versions can be run from specific directories and below simply by adding a .tool-versions file (containing the binary's name and version) in the directory of your choosing.
 
-
-
-<br><br><br>
-
-
-
-
-Todo: Work through "The Go Programming Language" Ch 8 and 9  
-  Up to end of 8.5 Looping in Parallel (pg 238)
-    We need to add something around this to this README, and also reference the gitlab project that uses this pattern.......................
-
-
-Looping in Parallel when we don't know the number of iterations.
-
-
-
-<br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Chapter 2. Primitive Types and Declarations
+
+
+
+
+
+
+
 
 ## Using `const`
 
