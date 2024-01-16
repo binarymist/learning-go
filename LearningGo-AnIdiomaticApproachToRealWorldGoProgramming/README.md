@@ -124,9 +124,52 @@ If using asdf, just follow the asdf documentation. You can have as many versions
 
 Go assigns a default zero value to any variable that is declared but not assigned a value.
 
+### Literals
 
+The following lower or upper case prefixes are used to indicate different bases:
 
+* `0b`: binary (base two)
+* `0o`: octal (base eight). `0` can also be used, but obviously it can cause confusion
+* `0x`: hexadecimal (base sixteen)
 
+Underscores `_` can be used to separate parts of a number, for example you can separate thousands in base ten (`1_234`). The underscores have no effect on the value of the number. Underscores can't be at the beginning, end, or next to each other in a number.
+
+* `6.03e23` is equivalent to `6.03` x `10`<sup>`23`</sup> in decimal notation
+* `0x6.03p23` represents a hexadecimal floating-point number, equivalent to `6.03` × `2`<sup>`23`</sup>. The use of "p" in this context is specific to Go's syntax for hexadecimal floating-point literals
+ 
+Single and double quotes are not interchangeable in Go.  
+_Rune literals_ represent characters and are surrounded by single quotes.
+
+Rune literals can be written as:
+
+* `'a'`: single unicode character
+* `'\141'`: 8-bit octal number
+* `'\x61'`: 8-bit hexadecimal number
+* `'\u0061'`: 16-bit hexadecimal number
+* `'\U00000061'`: 32-bit unicode number
+
+The most useful backslash escape rune literals:
+
+* `'\n'`: newline
+* `'\t'`: tab
+* `'\''`: single quote
+* `'\"'`: double quote
+* `'\\'`: backslash
+
+"_`Practically speaking, use base ten to represent your number literals and, unless the context makes your code clearer, try to avoid using any of the hexadecimal escapes for rune literals. Octal representations are rare, mostly used to represent POSIX permission flag values (such as 0o777 for rwxrwxrwx). Hexadecimal and binary are sometimes used for bit filters or networking and infrastructure applications._"
+
+The interpreted string literal: `"Greetings and\n\"Salutations\""` ends up being:
+```
+Greetings and
+"Salutations"
+```
+
+"_If you need to include backslashes, double quotes, or newlines in your string, use a raw string literal. These are delimited with backquotes (<code>`</code>) and can contain any literal character except a backquote. When using a raw string literal, we write our multiline greeting like so:_"
+
+```
+`Greetings and
+"Salutations"`
+```
 
 
 ## Using `const`
