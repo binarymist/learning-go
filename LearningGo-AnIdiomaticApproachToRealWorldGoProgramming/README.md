@@ -118,7 +118,11 @@ If using asdf, just follow the asdf documentation. You can have as many versions
 
 # Chapter 2. Primitive Types and Declarations
 
+## Built-in Types
 
+### The Zero Value
+
+Go assigns a default zero value to any variable that is declared but not assigned a value.
 
 
 
