@@ -171,6 +171,61 @@ Greetings and
 "Salutations"`
 ```
 
+## Numeric Types
+
+### Integer types
+
+There are signed and unsigned integers from one to four bytes:
+
+| Type name | Alias                    | Value range |
+|-----------|--------------------------|-------------|
+| `int8`    |                          | -128 to 127 |
+| `int16`   |                          | -32768 to 32767 |
+| `int32`   | `int` (most 32-bit CPU)  | -2147483648 to 2147483647 |
+| `int64`   | `int` (most 64-bit CPU)  | -9223372036854775808 to 9223372036854775807 |
+| `uint8`   | `byte`                   | 0 to 255 |
+| `uint16`  |                          | 0 to 65536 |
+| `uint32`  | `uint` (most 32-bit CPU) | 0 to 4294967295 |
+| `uint64`  | `uint` (most 64-bit CPU) | 0 to 18446744073709551615 |
+
+`int`, on a 32-bit CPU is a 32-bit signed integer like an `int32`.
+On most 64-bit CPUs, int is a 64-bit signed integer like an `int64`.
+Because `int` isn’t consistent from platform to platform, it is a compile-time error to assign, compare, or perform mathematical operations between an `int` and an `int32` or `int64` without a type conversion.
+
+Go supports 32-bit signed integers as `int` on CPU architectures: amd64p32, mips64p32, and mips64p32le.
+
+`rune` (covered on pg 26) and `uintptr` (covered in ch 14) are special names for integer types also.
+
+Go has all the usual bit-manipulation operators found in other languages.
+
+### Floating point types
+
+The floating point types are:
+
+* `float32`
+* `float64`
+
+Unless you have to be compatible with an existing format, use `float64`. Floating point literals have a default type of `float64`.
+In most cases you shouldn't use a floating point number at all.
+Go floating point numbers have a huge range, but they cannot store every value in that range; they store the nearest approximation. Because floats aren’t exact, they can only be used in situations where inexact values are acceptable or the rules of floating point are well understood.
+
+If you have to use a float, you can use `==` and `!=` to compare floats, but don’t do it.
+Due to the inexact nature of floats, two floating point values might not be equal when you think they should be.
+Instead, define a maximum allowed variance and see if the difference between two floats is less than that.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Using `const`
 
