@@ -181,7 +181,7 @@ There are signed and unsigned integers from one to four bytes:
 |-----------|--------------------------|-------------|
 | `int8`    |                          | -128 to 127 |
 | `int16`   |                          | -32768 to 32767 |
-| `int32`   | `int` (most 32-bit CPU)  | -2147483648 to 2147483647 |
+| `int32`   | `int` (most 32-bit CPU), `rune` | -2147483648 to 2147483647 |
 | `int64`   | `int` (most 64-bit CPU)  | -9223372036854775808 to 9223372036854775807 |
 | `uint8`   | `byte`                   | 0 to 255 |
 | `uint16`  |                          | 0 to 65536 |
@@ -213,13 +213,23 @@ If you have to use a float, you can use `==` and `!=` to compare floats, but don
 Due to the inexact nature of floats, two floating point values might not be equal when you think they should be.
 Instead, define a maximum allowed variance and see if the difference between two floats is less than that.
 
+### A Taste of Strings and Runes
 
+### Explicit Type Conversion
 
+These are built-in conversion expressions, not functions as they look like.
 
+## Declaring Variables
 
+## `var` Versus `:=`
 
+`:=` can be used to assign values to new and existing variables, as long as there is one new variable on the lefthand side of the `:=`.
+Beware of creating new shadow variables with `:=` when you think you are reusing an existing variable.
+In situations like this, explicitly declare all of your new variables with `var` to make it clear which variables are new, and then use the assignment operator (`=`) to assign values to both new and old variables.
 
+While `var` and `:=` allow you to declare multiple variables on the same line, only use this style when assigning multiple values returned from a function or the comma ok idiom.
 
+## Using `const`
 
 
 
