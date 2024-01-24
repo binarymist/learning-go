@@ -231,7 +231,7 @@ While `var` and `:=` allow you to declare multiple variables on the same line, o
 
 ## Using `const`
 
-
+`const` in Go is very limited. Constants in Go are a way to give names to literals. They can only hold values that the compiler can figure out at compile time.
 
 
 
