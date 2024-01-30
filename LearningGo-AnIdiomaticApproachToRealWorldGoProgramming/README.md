@@ -313,18 +313,18 @@ Also covered in:
 * [Go for JavaScript Developers: Types - Arrays / Slices](http://www.pazams.com/Go-for-Javascript-Developers/pages/types/#d-arrays--slices) Discusses the differences between arrays in Go vs JavaScript, including how slices fit
 * [Go by Example: Arrays](https://gobyexample.com/arrays)
 
-`==` and `!=` can be used for equality checking in arrays and slices, deep equality checking also works.
+`==` and `!=` can be used for equality checking in arrays but not slices, deep equality checking also works.
 
-"_Go only has one-dimensional arrays, but you can simulate multidimensional arrays:_"  
+"_Go only has one-dimensional arrays and slices, but you can simulate multidimensional arrays or slices:_"  
 `var x [2][3]int`  
 "_This declares `x` to be an array of length 2 whose type is an array of ints of length 3._"
 
-"_Go considers the size of the array to be part of the type of the array._"
-"_This makes an array that’s declared to be `[3]int` a different type from an array that’s declared to be `[4]int`._"
-"_This also means that you cannot use a variable to specify the size of an array, because types must be resolved at compile time, not at runtime._"
+"_Go considers the size of the array to be part of the type of the array._
+_This makes an array that’s declared to be `[3]int` a different type from an array that’s declared to be `[4]int`._
+_This also means that you cannot use a variable to specify the size of an array, because types must be resolved at compile time, not at runtime._"
 
-"_What’s more, you can’t use a type conversion to convert arrays of different sizes to identical types._"
-"_Because you can’t convert arrays of different sizes into each other, you can’t write a function that works with arrays of any size and you can’t assign arrays of different sizes to the same variable._"
+"_What’s more, you can’t use a type conversion to convert arrays of different sizes to identical types._
+_Because you can’t convert arrays of different sizes into each other, you can’t write a function that works with arrays of any size and you can’t assign arrays of different sizes to the same variable._"
 
 ## Slices
 
@@ -342,7 +342,9 @@ Also covered in:
 * "100 Go Mistakes and How to Avoid Them" [Slices and memory leaks (#26)](https://100go.co/#slices-and-memory-leaks-26)
 * "100 Go Mistakes and How to Avoid Them" [Slices and memory leaks (#26)](https://100go.co/#slices-and-memory-leaks-26)
 
-Go's arrays and slices are single-dimensional, you can however create the equivalent of multi-dimensional slices or arrays. Inspiration for the following example was from [Effective Go: Two-dimensional slices](https://go.dev/doc/effective_go#two_dimensional_slices):
+"_The length is not part of the type for a slice. This removes the limitations of arrays._"
+
+Inspiration for the following example was from [Effective Go: Two-dimensional slices](https://go.dev/doc/effective_go#two_dimensional_slices):
 
 ```go
 package main
@@ -387,6 +389,28 @@ vs
 //Declares a non-nill slice:
 t := []string{}
 ```
+
+Slices can not be compared with `==` or `!=`. "_The only thing you can compare a slice with is `nil`_".
+
+"_The `reflect` package contains a function called `DeepEqual` that can compare almost anything, including slices.
+It’s primarily intended for testing, but you could use it to compare slices if you needed to._"
+
+### `len`
+
+...........................
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### `append`
 
