@@ -231,19 +231,37 @@ While `var` and `:=` allow you to declare multiple variables on the same line, o
 
 ## Using `const`
 
-`const` in Go is very limited. Constants in Go are a way to give names to literals. They can only hold values that the compiler can figure out at compile time.
-
-
-
-
-
-## Using `const`
-
 Also covered in:
 
 * [Effective Go: Initialization](https://go.dev/doc/effective_go#initialization)
 
 Created at compile time, as opposed to variables at runtime.
+
+`const` in Go is very limited. Constants in Go are a way to give names to literals. They can only hold values that the compiler can figure out at compile time.
+
+## Typed and Untyped Constants
+
+Here’s what an untyped constant declaration looks like:
+
+```go
+const x = 10
+```
+
+All of the following assignments are legal:
+
+```go
+var y int = x
+var z float64 = x
+var d byte = x
+```
+
+Here’s what a typed constant declaration looks like:
+
+```go
+const typedX int = 10
+```
+
+This constant can only be assigned directly to an `int`.
 
 ## Unused Variables
 
@@ -266,9 +284,25 @@ MixedCaps is also discussed in:
 
 No snake_case, use PascalCase for exported identifiers, use camelCase for unexported identifiers.
 
+[Unicode characters](https://www.ssec.wisc.edu/~tomw/java/unicode.html) are allowed for variable naming, but don't use them.
+
 # Chapter 3. Composite Types
 
 [Effective Go: Constructors and composite literals](https://go.dev/doc/effective_go#composite_literals) discusses composite literals.
+
+Using `[n]` or `[...]` makes an array. Using `[]` makes a slice.
+
+In arrays and slices you can create what's known as a sparse array or slice.
+
+Array:
+
+`var x = [12]int{1, 5: 4, 6, 10: 100, 15}`  
+Creates an array of 12 ints with the following values: [1, 0, 0, 0, 0, 4, 6, 0, 0, 0, 100, 15].
+
+Slice:
+
+`var x = []int{1, 5: 4, 6, 10: 100, 15}`  
+Creates a slice of 12 ints with the following values: [1, 0, 0, 0, 0, 4, 6, 0, 0, 0, 100, 15].
 
 ## Arrays—Too Rigid to Use Directly
 
@@ -278,6 +312,19 @@ Also covered in:
 * Pg 81, **4.1. Arrays** of "The Go Programming Language"
 * [Go for JavaScript Developers: Types - Arrays / Slices](http://www.pazams.com/Go-for-Javascript-Developers/pages/types/#d-arrays--slices) Discusses the differences between arrays in Go vs JavaScript, including how slices fit
 * [Go by Example: Arrays](https://gobyexample.com/arrays)
+
+`==` and `!=` can be used for equality checking in arrays and slices, deep equality checking also works.
+
+"_Go only has one-dimensional arrays, but you can simulate multidimensional arrays:_"  
+`var x [2][3]int`  
+"_This declares `x` to be an array of length 2 whose type is an array of ints of length 3._"
+
+"_Go considers the size of the array to be part of the type of the array._"
+"_This makes an array that’s declared to be `[3]int` a different type from an array that’s declared to be `[4]int`._"
+"_This also means that you cannot use a variable to specify the size of an array, because types must be resolved at compile time, not at runtime._"
+
+"_What’s more, you can’t use a type conversion to convert arrays of different sizes to identical types._"
+"_Because you can’t convert arrays of different sizes into each other, you can’t write a function that works with arrays of any size and you can’t assign arrays of different sizes to the same variable._"
 
 ## Slices
 
