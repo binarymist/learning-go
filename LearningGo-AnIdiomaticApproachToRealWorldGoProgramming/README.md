@@ -443,21 +443,48 @@ There are several permutations using `make`. Specifying nonzero length, zero len
 
 ### Slicing Slices
 
+Another not-so-great part of the Go language...
 
+"_When you take a slice from a slice, you are not making a copy of the data. Instead, you now have two variables that are sharing memory._"
 
+```go
+// ...
+x := []int{1, 2, 3, 4}
+y := x[:2] // y == [1, 2]
+z := x[1:] // z == [2, 3, 4]
+x[1] = 20
+// x now == [1, 20, 3, 4]
+// y now == [1, 20]
+// z now == [20, 3, 4]
+y[0] = 10
+// x now == [10, 20, 3, 4]
+// y now == [10, 20]
+// z now = [20, 3, 4]
+z[1] = 30
+// x now == [10, 20, 30, 4]
+// y now == [10, 20]
+// z == [20, 30, 4]
+// ...
+```
 
+Changing `x` modified both `y` and `z`, while changes to `y` and `z` modified `x`.
 
+Slicing slices gets extra confusing when combined with append:
 
+```go
+x := []int{1, 2, 3, 4}
+y := x[:2]                                  // y == [1, 2]
+fmt.Println(len(x), len(y), cap(x), cap(y)) // 4, 2, 4, 4
+y = append(y, 30)
+// x now == [1, 2, 30, 4]
+// y now == [1, 2, 30]
+```
 
+"_To avoid complicated slice situations, you should either never use append with a sub‐slice or make sure that append doesn’t cause an overwrite by using a full slice expression._"
 
+"_The full slice expression (`x[:2:2]`, `x[2:4:4]`) includes a third part , which indicates the last position in the parent slice’s capacity that’s available for the subslice._"
 
-
-
-
-
-
-
-
+It's well worth reading and understanding "_Example 3-7. Even more confusing slices_" on pg 45.
 
 
 
