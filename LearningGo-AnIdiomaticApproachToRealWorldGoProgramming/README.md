@@ -486,7 +486,11 @@ y = append(y, 30)
 
 It's well worth reading and understanding "_Example 3-7. Even more confusing slices_" on pg 45.
 
+### Converting Arrays to Slices
 
+"_If you have an array, you can take a slice from it using a slice expression._"
+
+"_be aware that taking a slice from an array has the same memory-sharing properties as taking a slice from a slice._"
 
 
 
