@@ -418,6 +418,41 @@ The built-in function [`make`](https://pkg.go.dev/builtin#make) creates slices, 
 
 If you use a variable to specify a capacity with `make` that’s smaller than the length, your program will panic at runtime.
 
+### Declaring Your Slice
+
+Declaring a slice that might stay nil:
+```go
+var data []int
+```
+
+Create a slice using an empty slice literal
+
+```go
+var x = []int{}
+// or
+x := []int{}
+```
+
+If you have some starting values, or if a slice’s values aren’t going to change, then a slice literal is a good choice
+
+```go
+data := []int{2, 4, 6, 8}
+```
+
+There are several permutations using `make`. Specifying nonzero length, zero length and nonzero capacity. Check the three possibilities in the book.
+
+### Slicing Slices
+
+
+
+
+
+
+
+
+
+
+
 
 
 
