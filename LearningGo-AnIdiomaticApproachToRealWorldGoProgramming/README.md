@@ -397,21 +397,6 @@ It’s primarily intended for testing, but you could use it to compare slices if
 
 ### `len`
 
-...........................
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### `append`
 
 Also covered in:
@@ -423,11 +408,25 @@ Also covered in:
 * "100 Go Mistakes and How to Avoid Them" [Unexpected side effects using slice append (#25)](https://100go.co/#unexpected-side-effects-using-slice-append-25)
 * "100 Go Mistakes and How to Avoid Them" [Creating data races with append (#69)](https://100go.co/#creating-data-races-with-append-69)
 
+### Capacity
+
 ### `make`
 
 The built-in function [`make`](https://pkg.go.dev/builtin#make) creates slices, maps, and channels only.
 
 [Effective Go: Allocation with make](https://go.dev/doc/effective_go#allocation_make), has some low value examples.
+
+If you use a variable to specify a capacity with `make` that’s smaller than the length, your program will panic at runtime.
+
+
+
+
+
+
+
+
+
+
 
 ## Maps
 
