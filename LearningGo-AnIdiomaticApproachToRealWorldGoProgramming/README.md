@@ -492,6 +492,20 @@ It's well worth reading and understanding "_Example 3-7. Even more confusing sli
 
 "_be aware that taking a slice from an array has the same memory-sharing properties as taking a slice from a slice._"
 
+### `copy`
+
+Using the built-in `copy` function rectifies the above problems with copying the memory locations.
+
+## Strings and Runes and Bytes
+
+
+
+
+
+
+
+
+
 
 
 ## Maps
